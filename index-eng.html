@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="HIVA demonstration for web-site audio-visual assitance"/>
+    <meta name="author" content="HIVA inc."/>
+    <title>HIVA</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top"><img src="assets/img/aiu_logo.png" alt="..."/></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="switch">
+            <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox">
+            <label for="language-toggle" id="ru"></label>
+            <span class="off">RU</span>
+            <span class="on">ENG</span>
+            <script>
+                const ru = document.getElementById('ru');
+                ru.addEventListener('click', function () {
+                window.location.href = 'index.html';
+            });
+        </script>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead darken-pseudo darken-with-text">
+    <div class="container">
+        <div class="masthead-heading text-uppercase">first visual voice assistant for web usage</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Interesting</a>
+    </div>
+</header>
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Admissions and Programs</h2>
+            <h3 class="section-subheading text-muted"></h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary" style="color: #2c2454 !important;"></i>
+                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        </span>
+                <h4 class="my-3">Passing score</h4>
+                <p class="text-muted">The passing score required for university admission at Ala-Too International
+                    University is one hundred and ten (110) points for the main test.</p>
+            </div>
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary" style="color: #2c2454 !important;"></i>
+                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                        </span>
+                <h4 class="my-3">Internal tests</h4>
+                <p class="text-muted">Ala-Too International University conducts an internal test in English to determine
+                    the level of language proficiency.</p>
+            </div>
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary" style="color: #2c2454 !important;"></i>
+                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                        </span>
+                <h4 class="my-3">University transfers</h4>
+                <p class="text-muted">Students can transfer, but with the exception of those who are in their first and
+                    last year at their current university. Additionally, you would typically need to provide an academic
+                    transcript from your current institution when applying for a transfer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<div id="widget-background"
+     style="position: fixed; top: 0; left: 0; z-index: 999; background-color: black; opacity: 0.7; width: 100vw; height: 100vh; display: none;"></div>
+<iframe id="widget-app"
+        style="position: fixed; bottom: 30px; left: 10px; border-radius: 20px; border: none; z-index: 9999;"
+        src="https://hivaweb.github.io/widget/" title="HIVAWIDGET" width="122"
+        height="172" allowtransparency scrolling="no" seamless allow="microphone"></iframe>
+
+<script>
+    let widgetApp = document.getElementById('widget-app');
+    let widgetBackground = document.getElementById('widget-background');
+    let openWidget = false;
+
+    widgetApp.addEventListener('load', function () {
+        const iframeContentWindow = widgetApp.contentWindow;
+        const iframeDocument = iframeContentWindow.document;
+        const canvas = iframeDocument.querySelector('canvas');
+        widgetApp.contentWindow.switchLanguage("en-EN");
+
+        canvas.addEventListener('click', function (event) {
+            if (!openWidget) {
+                widgetApp.width = "260px";
+
+                if (window.innerWidth < 600) {
+                    widgetApp.style.left = "calc(50% - 130px)";
+                    widgetApp.style.bottom = "50px";
+                }
+
+                widgetApp.height = "430px";
+                openWidget = true;
+                widgetApp.contentWindow.showModal();
+                widgetApp.contentWindow.sayHello();
+                widgetBackground.style.display = "block";
+            } else {
+                widgetApp.width = "120px";
+
+                if (window.innerWidth < 600) {
+                    widgetApp.style.left = "10px";
+                    widgetApp.style.bottom = "30px";
+                }
+
+                widgetApp.height = "170px";
+                openWidget = false;
+                widgetApp.contentWindow.hideModal();
+                widgetApp.contentWindow.stopRecognize();
+                widgetApp.contentWindow.clearAfterClose();
+                widgetBackground.style.display = "none";
+            }
+
+            widgetApp.contentWindow.document.body.style.width = widgetApp.width;
+            widgetApp.contentWindow.document.body.style.height = widgetApp.height;
+
+            event.stopPropagation();
+        });
+    });
+
+</script>
+</body>
+</html>
